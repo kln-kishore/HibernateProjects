@@ -1,0 +1,19 @@
+<!DOCTYPE hibernate-configuration PUBLIC
+"//HIBERNATE/Hibernate Configuration DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+		<property name="connection.driver_class">oracle.jdbc.OracleDriver</property>
+		<property name="connection.url">jdbc:oracle:thin:@localhost:1521:XE</property>
+		<property name="connection.username">system</property>
+		<property name="connection.password">12345</property>
+		<property name="connection.pool_size">10</property>
+		<property name="auto-commit">true</property>
+		<property name="show_sql">true</property>
+		<property name="format_sql">true</property>
+		<property name="dialect">org.hibernate.dialect.Oracle10gDialect</property>
+		<property name="hbm2ddl.auto">update</property>
+		
+		<mapping class="com.kln.domain.ApplicantInfo" />
+	</session-factory>
+</hibernate-configuration>
