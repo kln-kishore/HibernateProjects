@@ -5,9 +5,9 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
-import com.kln.domain.ApplicantInfo;
+import com.kln.domain.EmployeeDetails;
 
-public class Test_SAVE_method {
+public class ClientApp_DELETE_method {
 
 	public static void main(String[] args) {
 
@@ -18,26 +18,44 @@ public class Test_SAVE_method {
 		Session ses = null;
 		ses = factory.openSession();//getting a session object
 		
-		
-		ApplicantInfo ed = new ApplicantInfo();
-		ed.setAppId(1000);
-		ed.setAppName("Naga Kishore");
-		ed.setAppAddress("HYD, TS");
-		ed.setAppPanNo("CPXPK6039M");//creating domain class object wit data
-		
+		//------------------------		Approach - 1  ------------------------------------
+
+/*		EmployeeDetails ed = new EmployeeDetails();
+		ed.setEmpId(50002);
+				
 		Transaction tx=null;
 		try {
 			tx=ses.beginTransaction();
-			ses.save(ed); 
-			/*		 prototype::   public serializable save(Object obj);
-			 * ses.save() method gives instruction to hibernate to save the object 
-			 * and also returns the generated identity values back to java application
-			 * i.e. return type of persist() method is "serializable" interface
-			 */
+			ses.delete(ed); 
+			
 			tx.commit();
-			System.out.println("::::::::Record Inserted Successfully::::::::::::");
+			System.out.println("::::::::Record deleted Successfully::::::::::::");
 			}
 		catch(Exception e) {tx.rollback();}
+*/
+		//----------------------------------------------------------
+
+		//------------------------		Approach - 2  ------------------------------------
+		
+		EmployeeDetails ed = ses.get(EmployeeDetails.class, 50002);
+		if(ed!=null)
+		{
+			Transaction tx=null;
+			try
+			{
+				tx=ses.beginTransaction();
+				ses.delete(ed);
+				tx.commit();
+				System.out.println("::::::::Record deleted Successfully::::::::::::");
+			}
+			catch(Exception e) {tx.rollback();}
+		}
+		else
+		{
+			System.out.println("::::::::Record not found::::::::::::");
+		}
+		
+		
 		ses.close(); 
 		/*ses.close() method close the hibernate session object by releasing and cleaning up the JDBC connection object
 		* that is associated with Session object and also makes the domain class object as detached object from session

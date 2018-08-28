@@ -1,0 +1,11 @@
+<!DOCTYPE hibernate-configuration PUBLIC
+"//HIBERNATE/Hibernate Configuration DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.kln.domain.EmployeeDetails" table="EmployeeInfo">
+		<id name="empId" column="Employee_ID" />
+		<property name="empName" column="Employee_Name" />
+		<property name="city" column="Address" />
+		<property name="pay" column="salary" />
+	</class>
+</hibernate-mapping>
